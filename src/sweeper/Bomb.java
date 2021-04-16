@@ -18,14 +18,14 @@ class Bomb
             placeBomb();
     }
 
-    Box get (Coord coord)
+    Box get (Coords cord)
     {
-        return bombMap.get(coord);
+        return bombMap.get(cord);
     }
 
     private  void fixBombCount ()
     {
-        int maxBombs = Ranges.getSize().x * Ranges.getSize().y / 2;
+        int maxBombs = Ranges.getSize().x * Ranges.getSize().y / 3;  // измел с 2 на 3
         if (totalBombs > maxBombs)
             totalBombs = maxBombs;
     }
@@ -33,20 +33,25 @@ class Bomb
     {
         while (true)
         {
-            Coord coord = Ranges.getRandomCoord();
-            if (Box.BOMB == bombMap.get(coord))
+            Coords cord = Ranges.getRandomCord();
+            if (Box.BOMB == bombMap.get(cord))
                 continue;
-            bombMap.set(coord,Box.BOMB);
-            incNumbersAroundBomb(coord);
+            bombMap.set(new Coords(cord.x, cord.y), Box.BOMB);
+            incNumbersAroundBomb(cord);
             break;
         }
 
     }
 
-    private void incNumbersAroundBomb(Coord coord)
+    private void incNumbersAroundBomb(Coords cord)
     {
-        for (Coord around : Ranges.getCoordArround(coord))
+        for (Coords around : Ranges.getCordsAround(cord))
             if (Box.BOMB != bombMap.get (around))
                 bombMap.set(around, bombMap.get(around).getNextNumberBox());
+    }
+
+    int getTotalBombs()
+    {
+        return totalBombs;
     }
 }
