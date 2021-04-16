@@ -1,10 +1,11 @@
 package sweeper;
 
-public class Coord {
+public class Coords {
     public int x;
     public int y;
 
-    public Coord(int x, int y)
+
+    public Coords(int x, int y)
     {
         this.x = x;
         this.y = y;
@@ -13,9 +14,9 @@ public class Coord {
     @Override
     public boolean equals (Object o)
     {
-        if (o instanceof Coord)
+        if (o instanceof Coords)
         {
-            Coord to = (Coord) o;
+            Coords to = (Coords) o;
             return to.x == x && to.y == y;
         }
         return super.equals(o);

@@ -1,54 +1,53 @@
 package sweeper;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Ranges
 {
-    private static Coord size;
-    private static ArrayList <Coord> allCords;
-    private static Random random = new Random();
+    private static Coords size;
+    private static ArrayList <Coords> allCords;
+    private static final Random random = new Random();
 
-    public static void setSize (Coord _size)
+    public static void setSize (Coords _size)
     {
         size = _size;
-        allCords = new ArrayList<Coord>();
+        allCords = new ArrayList<>();
         for (int y = 0; y < size.y; y++)
             for (int x = 0; x < size.x; x++)
-                allCords.add(new Coord(x,y));
+                allCords.add(new Coords(x,y));
     }
 
-    public static Coord getSize()
+    public static Coords getSize()
     {
         return size;
     }
 
-    public static List<Coord> getAllCords ()
+    public static ArrayList<Coords> getAllCords ()
     {
         return allCords;
     }
 
-    static boolean inRange (Coord coord)
+    static boolean inRange (Coords cord)
     {
-        return coord.x >=0 && coord.x < size.x &&
-                coord.y >= 0 && coord.y < size.y;
+        return cord.x >=0 && cord.x < size.x &&
+                cord.y >= 0 && cord.y < size.y;
     }
 
-    static Coord getRandomCoord ()
+    static Coords getRandomCord()
     {
-        return new Coord(random.nextInt(size.x),
+        return new Coords(random.nextInt(size.x),
                          random.nextInt(size.y));
     }
 
-    static ArrayList <Coord> getCoordArround (Coord coord)
+    static ArrayList <Coords> getCordsAround(Coords cord)
     {
-        Coord around;
-        ArrayList<Coord> list = new ArrayList<>();
-        for (int x = coord.x - 1; x < coord.x + 1; x++){
-            for (int y = coord.y - 1; y < coord.y + 1; y++) {
-                if (inRange(around = new Coord(x, y)))
-                    if (!around.equals(coord))
+        Coords around;
+        ArrayList<Coords> list = new ArrayList<>();
+        for (int x = cord.x - 1; x <= cord.x + 1; x++){
+            for (int y = cord.y - 1; y <= cord.y + 1; y++) {
+                if (inRange(around = new Coords(x, y)))
+                    if (!around.equals(cord))
                         list.add(around);
             }
         }

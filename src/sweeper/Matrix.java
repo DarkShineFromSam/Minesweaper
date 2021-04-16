@@ -2,25 +2,25 @@ package sweeper;
 
 class Matrix
 {
-    private Box [] [] matrix;
+    private final Box [] [] matrix;
 
     Matrix (Box defaultBox)
     {
         matrix = new Box[Ranges.getSize().x][Ranges.getSize().y];
-        for (Coord coord : Ranges.getAllCords())
-            matrix [coord.x] [coord.y] = defaultBox;
+        for (Coords cord : Ranges.getAllCords())
+            matrix [cord.x] [cord.y] = defaultBox;
     }
 
-    Box get (Coord coord)
+    Box get (Coords cord)
     {
-        if (Ranges.inRange (coord))
-            return matrix [coord.x] [coord.y];
+        if (Ranges.inRange (cord))
+            return matrix [cord.x] [cord.y];
         return null;
     }
 
-    void set (Coord coord, Box box)
+    void set (Coords cord, Box box)
     {
-        if (Ranges.inRange (coord))
-        matrix [coord.x] [coord.y] = box;
+        if (Ranges.inRange (cord))
+        matrix [cord.x] [cord.y] = box;
     }
 }
